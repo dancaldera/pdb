@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "pdb",
+    "productName": "Pdb",
     "version": "0.1.0"
   },
   "tauri": {
@@ -19,8 +19,8 @@
     },
     "windows": [
       {
-        "title": "pdb",
-        "width": 800,
+        "title": "Pdb",
+        "width": 1024,
         "height": 600
       }
     ],
