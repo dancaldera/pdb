@@ -1,7 +1,12 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+// import reactLogo from "./assets/react.svg";
+import { ThemeProvider } from "@/components/theme-provider";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
+import { Button } from "./components/button";
+import { Label } from "./components/label";
+import { Input } from "./components/input";
+import { ModeToggle } from "./components/mode-toggle";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -13,40 +18,30 @@ function App() {
   }
 
   return (
-    <div className="bg-black">
-      <h1 className="text-3xl font-bold text-center text-gray-900">PDB</h1>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div>
+        <Label>Click on the Tauri, Vite, and React logos to learn more.</Label>
 
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <form
+          className="row"
+          onSubmit={(e) => {
+            e.preventDefault();
+            greet();
+          }}
+        >
+          <Input
+            id="greet-input"
+            onChange={(e) => setName(e.currentTarget.value)}
+            placeholder="Enter a name..."
+          />
+          <Button type="submit">Greet</Button>
+        </form>
+
+        <Label>{greetMsg}</Label>
       </div>
 
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-
-      <p>{greetMsg}</p>
-    </div>
+      <ModeToggle />
+    </ThemeProvider>
   );
 }
 
