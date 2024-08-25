@@ -7,6 +7,7 @@ import { Button } from "./components/button";
 import { Label } from "./components/label";
 import { Input } from "./components/input";
 import { ModeToggle } from "./components/mode-toggle";
+import { PlusIcon } from "lucide-react";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -19,28 +20,34 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div>
-        <Label>Click on the Tauri, Vite, and React logos to learn more.</Label>
-
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold text-center my-4">Welcome to Pdb</h1>
+        <h2 className="text-xl font-semibold text-center my-4">
+          Open Source Database Management Tool
+        </h2>
         <form
-          className="row"
+          className="flex items-center space-x-2 my-2"
           onSubmit={(e) => {
             e.preventDefault();
             greet();
           }}
         >
+          <Button type="submit">
+            <PlusIcon size={16} />
+          </Button>
           <Input
-            id="greet-input"
             onChange={(e) => setName(e.currentTarget.value)}
-            placeholder="Enter a name..."
+            placeholder="Search for a connection..."
           />
-          <Button type="submit">Greet</Button>
         </form>
 
         <Label>{greetMsg}</Label>
       </div>
 
-      <ModeToggle />
+      {/* Force this toggle to be in the bottom right corner */}
+      <div className="fixed bottom-4 right-4">
+        <ModeToggle />
+      </div>
     </ThemeProvider>
   );
 }
